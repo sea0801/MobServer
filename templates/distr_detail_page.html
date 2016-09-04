@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>移动应用安装</title>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="stylesheet" href="{{ server }}/ui/css/screen.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="{{ server }}/ui/css//print.css" type="text/css" media="print">
+    <!--[if IE]>
+    <link rel="stylesheet" href="{{ server }}/ui/css//ie.css" type="text/css" media="screen, projection">
+    <![endif]-->
+    <link rel="stylesheet" href="{{ server }}/ui/css/plugins/buttons/screen.css" type="text/css"
+          media="screen, projection">
+    <link rel="stylesheet" type="text/css" href="{{ server }}/ui/css/stylesheet.css">
+</head>
+{% if devicetype == 'desktop' %}
+<body class="browser-desktop">
+{% end %}
+{% if devicetype == 'android' %}
+<body class="browser-android">
+{% end %}
+{% if devicetype == 'ios' %}
+<body class="browser-ios4">
+{% end %}
+<div id="container" class="container">
+
+    {% if devicetype == 'desktop' %}
+    <div class='desktop'>
+
+        <h1>移动应用安装</h1>
+
+        <p>下面是移动应用 《{{ escape(items['name']) }}》 的最新包下载地址以及历史构建包下载地址,可进行下载安装体验.这里只提供下载,需要将包安装到手机上进行使用.</p>
+
+        <p class="bordertop"><br/></p>
+
+
+        <div class="column span-3">
+            <a href="?app={{ escape(items['name']) }}&type={{ escape(items['type']) }}"><img class="icon"
+                                                                                             src="{{ escape(items['image']) }}"></a>
+        </div>
+        <div class="column span-8">
+            <a href="?app={{ escape(items['name']) }}&type={{ escape(items['type']) }}"><h2>{{ escape(items['name'])
+                }}</h2></a>
+
+            <p><b>Description:</b>
+                {{ escape(items['description']) }}<br/><b>Version:</b>
+                {{ escape(items['package'][0]['version']) }}<br/><b>Size:</b> {{ escape(items['package'][0]['size']) }}
+                MB<br/><b>Released:</b>
+                {{
+                escape(items['package'][0]['released']) }} </p>
+
+            <div class="desktopbuttons">
+                {% if items['type']== 'ios' %}
+                <a class="button" href="{{ escape(items['package'][0]['package_path']) }}"
+                   download="{{ escape(items['name']) }}.ipa">Download
+                    Last Build</a>
+                {% end %}
+                {% if items['type']== 'android' %}
+                <a class="button" href="{{ escape(items['package'][0]['package_path']) }}"
+                   download="{{ escape(items['name']) }}.apk">Download
+                    Last Build</a>
+                {% end %}
+            </div>
+            <p><br/><br/></p>
+
+            <p><b>What's New:</b><br/>Restriction iOS app version 1 release notes</p>
+
+        </div>
+
+    </div>
+    {% end %}
+
+    {% if devicetype== "android" %}
+    <div class="column span-12">
+
+        <h1>移动应用安装</h1>
+
+        <p>下面是移动应用 《{{ escape(items['name']) }}》 的最新包下载地址以及历史构建包下载地址,可进行下载安装体验.</p>
+
+        <div style='clear:both;'><br/></div>
+
+
+        <div class="version">
+            <p class="borderbottom"></p>
+            <a name="{{ escape(items['name']) }}"><br/></a>
+            <a href="?app={{ escape(items['name']) }}&type={{ escape(items['type']) }}">
+                <img class="icon" src="{{ escape(items['image']) }}">
+            </a>
+
+            <h3>{{ escape(items['name']) }}</h3>
+
+            <p><b>Version:</b>
+                {{ escape(items['package'][0]['version']) }}<br/><b>Size:</b> {{ escape(items['package'][0]['size'])
+                }} MB<br/><b>Released:</b>
+                {{ escape(items['package'][0]['released']) }} </p>
+            {% if items['type']== 'ios' %}
+            <a class="button" href="{{ escape(items['package'][0]['package_path']) }}"
+               download="{{ escape(items['name']) }}.ipa">Download
+                Application</a>
+            {% end %}
+            {% if items['type']== 'android' %}
+            <a class="button" href="{{ escape(items['package'][0]['package_path']) }}"
+               download="{{ escape(items['name']) }}.apk">Download
+                Application</a>
+            {% end %}
+        </div>
+    </div>
+    {% end %}
+
+    {% if devicetype== "ios" %}
+    <div class="column span-12">
+
+        <h1>移动应用安装</h1>
+
+        <p>下面是移动应用 《{{ escape(items['name']) }}》 的最新包下载地址以及历史构建包下载地址,可进行下载安装体验.</p>
+
+        <p>如果安装失败,可尝试先安装配置文件,之后再进行安装。如果还是安装失败,设备可能未被包含.</p>
+
+        <p><a href="{{ server }}/static/ca.crt">证书安装</a></p>
+
+        <div style='clear:both;'><br/></div>
+        <div class="version">
+            <p class="borderbottom"></p>
+            <a name="{{ escape(items['name']) }}"><br/></a>
+            <a href="?app={{ escape(items['name']) }}&type={{ escape(items['type']) }}">
+                <img class="icon" src="{{ escape(items['image']) }}">
+            </a>
+
+            <h3>{{ escape(items['name']) }}</h3>
+
+            <p><b>Version:</b>
+                {{ escape(items['package'][0]['version']) }}<br/><b>Size:</b> {{ escape(items['package'][0]['size']) }}
+                MB<br/><b>Released:</b>
+                {{ escape(items['package'][0]['released']) }} </p>
+
+            <div style='clear:both;'></div>
+            {% if items['package'][0].has_key('mobileprovision') and items['package'][0]['mobileprovision'] != '' %}
+            <a class="button" href="{{ escape(items['package'][0]['mobileprovision']) }}" download="{{ escape(items['name']) }}.mobileprovision">Download
+                Profile</a>
+            {% end %}
+            {% if items['type']== 'ios' %}
+            <a class="button" href="{{ escape(items['package'][0]['package_url']) }}">Download
+                Application</a>
+            {% end %}
+            {% if items['type']== 'android' %}
+            <a class="button" href="{{ escape(items['package'][0]['package_path']) }}"
+               download="{{ escape(items['name']) }}.apk">Download
+                Application</a>
+            {% end %}
+        </div>
+    </div>
+    {% end %}
+    <script type="text/javascript" charset="utf-8">
+            /mobile/i.test(navigator.userAgent) &&
+            !window.location.hash &&
+            setTimeout(function () { window.scrollTo(0, 1); }, 2000);
+
+    </script>
+</div>
+<div id="package_container" class="container">
+    <h2>历史版本如下:</h2>
+
+    <p class="bordertop"><br/></p>
+    <table border="1" style="font-size:15px">
+        <tr>
+            <th>构建ID</th>
+            <th>构建日期</th>
+            <th>包下载</th>
+        </tr>
+        {% for package in items['package'] %}
+        <tr>
+            <td>{{ escape(package['version']) }}</td>
+            <td>{{ escape(package['released']) }}</td>
+            {% if devicetype == 'ios' and items['type'] == 'ios' %}
+            <td><a href="{{ escape(package['package_url']) }}">下载链接</a></td>
+            {% end %}
+            {% if devicetype != 'ios' and items['type'] == 'ios' %}
+            <td><a href="{{ escape(package['package_path']) }}" download="{{ escape(items['name']) }}.ipa">下载链接</a></td>
+            {% end %}
+            {% if items['type'] != 'ios' %}
+            <td><a href="{{ escape(package['package_path']) }}" download="{{ escape(items['name']) }}.apk">下载链接</a></td>
+            {% end %}
+        </tr>
+        {% end %}
+    </table>
+
+</div>
+</body>
+</html>

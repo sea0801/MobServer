@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>移动应用安装</title>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="stylesheet" href="{{ server }}/ui/css/screen.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="{{ server }}/ui/css//print.css" type="text/css" media="print">
+    <!--[if IE]>
+    <link rel="stylesheet" href="{{ server }}/ui/css//ie.css" type="text/css" media="screen, projection">
+    <![endif]-->
+    <link rel="stylesheet" href="{{ server }}/ui/css/plugins/buttons/screen.css" type="text/css"
+          media="screen, projection">
+    <link rel="stylesheet" type="text/css" href="{{ server }}/ui/css/stylesheet.css">
+</head>
+{% if devicetype == 'desktop' %}
+<body class="browser-desktop">
+{% end %}
+{% if devicetype == 'android' %}
+<body class="browser-android">
+{% end %}
+{% if devicetype == 'ios' %}
+<body class="browser-ios4">
+{% end %}
+<div id="container" class="container">
+
+    {% if devicetype == 'desktop' %}
+    <div class='desktop'>
+
+        <h1>移动应用安装</h1>
+        <p>下面是发布系统所包含的应用汇总</p>
+        <p class="bordertop"><br/></p>
+
+        {% for item in items %}
+        <div class="column span-3">
+            <a href="?app={{ escape(item['name']) }}&type={{ escape(item['type']) }}"><img class="icon"
+                                                                                           src="{{ escape(item['image']) }}"></a>
+        </div>
+        <div class="column span-8">
+            <a href="?app={{ escape(item['name']) }}&type={{ escape(item['type']) }}"><h2>{{ escape(item['name'])
+                }}</h2></a>
+
+            <p><b>Description:</b>
+                {{ escape(item['description']) }}<br/><b>Version:</b>
+                {{ escape(item['package'][0]['version']) }}<br/><b>Size:</b> {{ escape(item['package'][0]['size']) }} MB<br/><b>Released:</b>
+                {{
+                escape(item['package'][0]['released']) }} </p>
+
+            <div class="desktopbuttons">
+                {% if item['type']== 'ios' %}
+                <a class="button" href="{{ escape(item['package'][0]['package_path']) }}" download="{{ escape(item['name']) }}.ipa">Download
+                    Last Build</a>
+                {% end %}
+                {% if item['type']== 'android' %}
+                <a class="button" href="{{ escape(item['package'][0]['package_path']) }}" download="{{ escape(item['name']) }}.apk">Download
+                    Last Build</a>
+                {% end %}
+            </div>
+
+            <p><br/><br/></p>
+        </div>
+        {% end %}
+
+    </div>
+    {% end %}
+
+    {% if devicetype== "android" %}
+    <div class='android'>
+
+        <h1>移动应用安装</h1>
+        <p>下面是发布系统所包含的应用汇总</p>
+        <br>
+        <p class="bordertop"></p>
+
+        <div class="grid">
+            {% for item in items %}
+            <div class="version">
+                <a name="{{ escape(item['name']) }}"><br/></a>
+                <a href="?app={{ escape(item['name']) }}&type={{ escape(item['type']) }}">
+                    <img class="icon" src="{{ escape(item['image']) }}">
+
+                    <h3>{{ escape(item['name']) }}</h3></a>
+                <p><b>Version:</b>
+                    {{ escape(item['package'][0]['version']) }}<br/><b>Size:</b> {{ escape(item['package'][0]['size'])
+                    }} MB<br/><b>Released:</b>
+                    {{ escape(item['package'][0]['released']) }} </p>
+                <div style='clear:both;'></div>
+                {% end %}
+
+                <div style='clear:both;'></div>
+            </div>
+        </div>
+        {% end %}
+
+        {% if devicetype== "ios" %}
+        <div class='new-ios'>
+
+            <h1>移动应用安装</h1>
+            <p>下面是发布系统所包含的应用汇总</p>
+            <p><a href="{{ server }}/static/ca.crt">证书安装</a></p>
+
+            <div style='clear:both;'><br/></div>
+            {% for item in items %}
+            <div class="version">
+                <p class="borderbottom"></p>
+                <a name="{{ escape(item['name']) }}"><br/></a>
+                <a href="?app={{ escape(item['name']) }}&type={{ escape(item['type']) }}">
+                    <img class="icon" src="{{ escape(item['image']) }}">
+
+                    <h3>{{ escape(item['name']) }}</h3></a>
+                <p><b>Version:</b>
+                    {{ escape(item['package'][0]['version']) }}<br/><b>Size:</b> {{ escape(item['package'][0]['size'])
+                    }} MB<br/><b>Released:</b>
+                    {{ escape(item['package'][0]['released']) }} </p>
+                <div style='clear:both;'></div>
+                {% end %}
+            </div>
+        </div>
+        {% end %}
+        <script type="text/javascript" charset="utf-8">
+            /mobile/i.test(navigator.userAgent) &&
+            !window.location.hash &&
+            setTimeout(function () { window.scrollTo(0, 1); }, 2000);
+
+        </script>
+    </div>
+</body>
+</html>
