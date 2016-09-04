@@ -1,6 +1,6 @@
 #About
-this is a server providing  app download and installation.support Android and iOS.<br/>
-https is required,so make sure that having genreated crts
+This is a server providing app download and installation,supporting Android and iOS.A solution for app ota<br/>
+Https is required,so make sure that having genreated crts
 
 #Requirements
 Python 2.7+<br/>
@@ -23,7 +23,7 @@ Tornado Module
 5.run the server: python main.py<br/>
 
 #Tdo
-1.add upload api
+1.add upload api<br/>
 2.add upload web
 
 
