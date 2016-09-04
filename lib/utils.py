@@ -141,4 +141,4 @@ def get_ext_file(file_path, file_type):
 
 
 if __name__ == '__main__':
-    print(get_ext_file('/Users/sean/SomeProjects/PycharmProjects/MobServer/distri_apps/ios/iOS_Passenger_5.0', 'png'))
+    pass
