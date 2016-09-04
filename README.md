@@ -1,6 +1,7 @@
 #About
 This is a server providing app download and installation,supporting Android and iOS.A solution for app ota<br/>
-Https is required,so make sure that having genreated crts
+Https is required,so make sure that having genreated crts.<br/>
+Thanks for HockeyKit,There are a lot of content to learn from it<br/>
 
 #Requirements
 Python 2.7+<br/>
