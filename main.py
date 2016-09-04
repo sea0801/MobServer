@@ -1,14 +1,12 @@
-import os
 from urls import application
-from settings import settings
 from config.config import *
 
 
 def https_server_main():
     http_server = tornado.httpserver.HTTPServer(application,
                                                 ssl_options={
-                                                    "certfile": '/Users/sean/SomeProjects/PycharmProjects/MobServer/cert/server.crt',
-                                                    "keyfile": '/Users/sean/SomeProjects/PycharmProjects/MobServer/cert/server.key',
+                                                    "certfile": './cert/server.crt',
+                                                    "keyfile": './cert/server.key',
                                                 })
 
     http_server.listen(443)
