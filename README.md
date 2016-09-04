@@ -22,6 +22,7 @@ Tornado Module
 3.set crts path in main.py<br/>
 4.copy ca.crt to static dir<br/>
 5.run the server: python main.py<br/>
+6.visit https://127.0.0.1/distribution over browser <br/>
 
 #Todo
 1.add upload api<br/>
