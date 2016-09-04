@@ -22,7 +22,7 @@ Tornado Module
 4.copy ca.crt to static dir<br/>
 5.run the server: python main.py<br/>
 
-#Tdo
+#Todo
 1.add upload api<br/>
 2.add upload web
 
